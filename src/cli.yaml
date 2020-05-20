@@ -1,0 +1,25 @@
+---
+name: azdopr
+version: "0.1.0"
+author: "Peter Grace <pete.grace@gmail.com>"
+about: "Creates Azure DevOps PR based on arguments"
+args:
+    - repository:
+        short: r
+        long: repository
+        help: repository to create PR in
+        takes_value: true
+        required: true
+    - source_branch:
+        short: s
+        long: source_branch
+        help: source branch to use for PR
+        takes_value: true
+        required: true
+    - destination_branch:
+        short: d
+        long: destination_branch
+        help: destination branch to use for PR
+        default_value: master
+        takes_value: true
+

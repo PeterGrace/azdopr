@@ -10,7 +10,7 @@ use clap::{App};
 use dirs::home_dir;
 use serde_json::{Value};
 use anyhow::{anyhow, Result};
-use reqwest::header::ACCEPT;
+use reqwest::header::{ACCEPT, CONTENT_TYPE};
 
 mod repo_settings;
 mod pr_options;
@@ -20,7 +20,8 @@ fn get_repo_id(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetti
         let repo_id_url = format!("https://dev.azure.com/{}/{}/_apis/git/repositories/{}", rs.organization, rs.project, rs.repository);
         let getreq = client.get(&repo_id_url)
             .basic_auth(&rs.pat,Some(&rs.pat))
-            .header(ACCEPT, "application/json; api-version=4.1")
+            .header(ACCEPT, "application/json;api-version=4.1")
+            .header(CONTENT_TYPE, "application/json")
             .send()?;
 
         if getreq.status().is_success() {
@@ -33,9 +34,6 @@ fn get_repo_id(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetti
 }
 
 fn create_pr(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSettings) -> Result<String,anyhow::Error> {
-/*
- * curl -L -u azdo:$(System.AccessToken) -XPOST -H "Content-Type: application/json" -d@$(Build.StagingDirectory)/pr.json https://dev.azure.com/barracudanetworks/Janus/_apis/git/repositories/${REPOID}/pullrequests?api-version=5.1
-*/
     let create_url = format!("https://dev.azure.com/{}/{}/_apis/git/repositories/{}/pullRequests",
                              rs.organization,
                              rs.project,
@@ -53,15 +51,16 @@ fn create_pr(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetting
     let jsonbody: String = serde_json::to_string(&pr_opts).unwrap();
     println!("{:#?}", jsonbody);
     let res = client.post(&create_url)
-        .header(ACCEPT, "application/json; api-version=5.1")
+        .header(ACCEPT, "application/json;api-version=5.1")
+        .header(CONTENT_TYPE, "application/json")
         .basic_auth(&rs.pat,Some(&rs.pat))
-        .json(&jsonbody)
+        .body(jsonbody)
         .send()?;
 
     if res.status().is_success() {
         println!("{}", res.text().unwrap());
         return Ok(String::from("good"));
-//        Ok(res.text().unwrap())
+        //Ok(res.text().unwrap())
     } else {
         println!("{}", res.text().unwrap());
         return Err(anyhow!("post command failed."));

@@ -10,6 +10,7 @@ use clap::{App};
 use dirs::home_dir;
 use serde_json::{Value};
 use anyhow::{anyhow, Result};
+use reqwest::header::ACCEPT;
 
 mod repo_settings;
 mod pr_options;
@@ -19,7 +20,7 @@ fn get_repo_id(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetti
         let repo_id_url = format!("https://dev.azure.com/{}/{}/_apis/git/repositories/{}", rs.organization, rs.project, rs.repository);
         let getreq = client.get(&repo_id_url)
             .basic_auth(&rs.pat,Some(&rs.pat))
-            .form(&params)
+            .header(ACCEPT, "application/json; api-version=4.1")
             .send()?;
 
         if getreq.status().is_success() {
@@ -35,7 +36,6 @@ fn create_pr(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetting
 /*
  * curl -L -u azdo:$(System.AccessToken) -XPOST -H "Content-Type: application/json" -d@$(Build.StagingDirectory)/pr.json https://dev.azure.com/barracudanetworks/Janus/_apis/git/repositories/${REPOID}/pullrequests?api-version=5.1
 */
-    let params = [ ("api-version", "5.1")];
     let create_url = format!("https://dev.azure.com/{}/{}/_apis/git/repositories/{}/pullRequests",
                              rs.organization,
                              rs.project,
@@ -51,8 +51,9 @@ fn create_pr(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetting
     pr_opts.description = format!("{}", rs.description);
     pr_opts.completionOptions = pr_completion;
     let jsonbody: String = serde_json::to_string(&pr_opts).unwrap();
+    println!("{:#?}", jsonbody);
     let res = client.post(&create_url)
-        .form(&params)
+        .header(ACCEPT, "application/json; api-version=5.1")
         .basic_auth(&rs.pat,Some(&rs.pat))
         .json(&jsonbody)
         .send()?;
@@ -62,6 +63,7 @@ fn create_pr(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetting
         return Ok(String::from("good"));
 //        Ok(res.text().unwrap())
     } else {
+        println!("{}", res.text().unwrap());
         return Err(anyhow!("post command failed."));
     }
 

@@ -37,7 +37,7 @@ fn create_pr(client: &reqwest::blocking::Client, rs: &repo_settings::RepoSetting
     let create_url = format!("https://dev.azure.com/{}/{}/_apis/git/repositories/{}/pullRequests",
                              rs.organization,
                              rs.project,
-                             rs._repo_id);
+                             rs.repository);
 
     let mut pr_completion: pr_options::CompletionOptions = Default::default();
     pr_completion.deleteSourceBranch = true;
@@ -81,8 +81,11 @@ fn main() -> Result<(),Box<dyn(Error)>> {
 
         let mut rs = repo_settings::RepoSettings::from_settings_and_args(settings, _matches);
         let client = reqwest::blocking::Client::new();
+/*
         let repo_id:String = get_repo_id(&client,&rs)?;
         rs._repo_id = repo_id;
+        println!("Repo id is {}", rs._repo_id);
+        */
         create_pr(&client, &rs);
 
 

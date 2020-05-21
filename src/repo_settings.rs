@@ -9,7 +9,10 @@ pub struct RepoSettings {
     pub repository: String,
     pub pat: String,
     pub source_branch: String,
-    pub destination_branch: String
+    pub destination_branch: String,
+    pub title: String,
+    pub description: String,
+    pub _repo_id: String
 }
 
 impl RepoSettings {
@@ -46,6 +49,13 @@ impl RepoSettings {
         if let Some(v) = matches.value_of("project") {
             rs.project = v.to_string();
         }
+        if let Some(v) = matches.value_of("title") {
+            rs.title = v.to_string();
+        }
+        if let Some(v) = matches.value_of("description") {
+            rs.description = v.to_string();
+        }
+
         rs
     }
 }

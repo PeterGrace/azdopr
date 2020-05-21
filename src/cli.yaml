@@ -4,6 +4,18 @@ version: "0.1.0"
 author: "Peter Grace <pete.grace@gmail.com>"
 about: "Creates Azure DevOps PR based on arguments"
 args:
+    - title:
+        short: t
+        long: title
+        help: title for PR
+        takes_value: true
+        required: true
+    - description:
+        short: m
+        long: message
+        help: description for PR
+        takes_value: true
+        default_value: "no description provided."
     - repository:
         short: r
         long: repository

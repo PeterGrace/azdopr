@@ -1,0 +1,62 @@
+Index: src/repo_settings.rs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>use config::Config;\r\nuse clap::{ArgMatches};\r\nuse log::{warn};\r\n\r\n#[derive(Default)]\r\npub struct RepoSettings {\r\n    pub organization: String,\r\n    pub project: String,\r\n    pub repository: String,\r\n    pub pat: String,\r\n    pub source_branch: String,\r\n    pub destination_branch: String,\r\n    pub title: String,\r\n    pub description: String,\r\n    pub _repo_id: String\r\n}\r\n\r\nimpl RepoSettings {\r\n    pub fn from_settings_and_args(settings: Config, matches: ArgMatches) -> RepoSettings {\r\n        let mut rs:RepoSettings=Default::default();\r\n        match settings.get(\"organization\") {\r\n            Ok(organization) => rs.organization=organization,\r\n            Err(e) => warn!(\"{:?}\",e)\r\n        };\r\n        match settings.get(\"project\") {\r\n            Ok(project) => rs.project=project,\r\n            Err(e) => warn!(\"{:?}\",e)\r\n        };\r\n        match settings.get(\"repository\") {\r\n            Ok(repository) => rs.repository=repository,\r\n            Err(e) => warn!(\"{:?}\",e)\r\n        };\r\n        match settings.get(\"pat\") {\r\n            Ok(pat) => rs.pat=pat,\r\n            Err(e) => warn!(\"{:?}\",e)\r\n        };\r\n        if let Some(v) = matches.value_of(\"source_branch\") {\r\n            rs.source_branch = v.to_string();\r\n        }\r\n        if let Some(v) = matches.value_of(\"destination_branch\") {\r\n            rs.destination_branch = v.to_string();\r\n        }\r\n        if let Some(v) = matches.value_of(\"repository\") {\r\n            rs.repository = v.to_string();\r\n        }\r\n        if let Some(v) = matches.value_of(\"organization\") {\r\n            rs.organization = v.to_string();\r\n        }\r\n        if let Some(v) = matches.value_of(\"project\") {\r\n            rs.project = v.to_string();\r\n        }\r\n        if let Some(v) = matches.value_of(\"title\") {\r\n            rs.title = v.to_string();\r\n        }\r\n        if let Some(v) = matches.value_of(\"description\") {\r\n            rs.description = v.to_string();\r\n        }\r\n\r\n        rs\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/repo_settings.rs	(revision 5b187378c326dcf6a00ae532a86bc0dd0cc6e186)
++++ src/repo_settings.rs	(date 1598999838662)
+@@ -55,7 +55,6 @@
+         if let Some(v) = matches.value_of("description") {
+             rs.description = v.to_string();
+         }
+-
+         rs
+     }
+ }
+Index: Cargo.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[package]\r\nname = \"azdopr\"\r\nversion = \"0.1.0\"\r\nauthors = [\"Peter Grace <pete.grace@gmail.com>\"]\r\nedition = \"2018\"\r\n\r\n# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html\r\n\r\n[dependencies]\r\ndirs = \">0.0\"\r\nlog = \">0.0\"\r\nserde = \"1.0.110\"\r\nserde_json = \"1.0.53\"\r\nserde_derive = \"1.0.110\"\r\nanyhow = \"1.0\"\r\n\r\n[dependencies.clap]\r\nversion = \"2.33.1\"\r\nfeatures = [\"yaml\"]\r\n\r\n[dependencies.config]\r\nversion = \"0.9\"\r\nfeatures = [\"yaml\"]\r\n\r\n[dependencies.reqwest]\r\nversion = \"0.10.4\"\r\nfeatures = [\"json\", \"blocking\"]\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Cargo.toml	(revision 5b187378c326dcf6a00ae532a86bc0dd0cc6e186)
++++ Cargo.toml	(date 1599000459313)
+@@ -7,21 +7,26 @@
+ # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+ 
+ [dependencies]
+-dirs = ">0.0"
+-log = ">0.0"
+-serde = "1.0.110"
+-serde_json = "1.0.53"
+-serde_derive = "1.0.110"
+-anyhow = "1.0"
++dirs = "3.0.1"
++log = "0.4.11"
++serde = "1.0.115"
++serde_json = "1.0.57"
++serde_derive = "1.0.115"
++anyhow = "1.0.32"
++js-sys = "0.3.44"
+ 
+ [dependencies.clap]
+ version = "2.33.1"
+ features = ["yaml"]
+ 
+ [dependencies.config]
+-version = "0.9"
++version = "0.10.1"
+ features = ["yaml"]
+ 
+ [dependencies.reqwest]
+-version = "0.10.4"
++version = "0.10.8"
+ features = ["json", "blocking"]
++
++[dev-dependencies]
++httpmock-macros = "0.3.0"
++httpmock = "0.4.3"
+\ No newline at end of file

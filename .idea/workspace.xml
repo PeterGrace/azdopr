@@ -19,7 +19,14 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated />
@@ -34,14 +41,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8c00a5b3-92d7-4c6d-a9d1-46df8b044535" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/azdopr.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/repo_settings.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/repo_settings.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pr_options.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/pr_options.rs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,13 +71,17 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="cf.first.check.clang-format" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Test" type="CargoCommandRunConfiguration" factoryName="Cargo Command" nameIsGenerated="true">
       <option name="channel" value="DEFAULT" />
       <option name="command" value="test" />
@@ -88,14 +94,10 @@
         <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="RustProjectSettings">
     <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
+    <option name="version" value="2" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -105,7 +107,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598999263965</updated>
-      <workItem from="1598999265236" duration="1183000" />
+      <workItem from="1598999265236" duration="1480000" />
+      <workItem from="1599000772757" duration="403000" />
     </task>
     <servers />
   </component>
@@ -117,17 +120,54 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="-905" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598999741963">
       <screen x="0" y="-1080" width="1920" height="1040" />
     </state>
     <state x="414" y="-905" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/0.-1080.1920.1040/-1920.3.1920.1040/1920.3.1920.1040/-1920.-1077.1920.1040/1920.-1077.1920.1040@0.-1080.1920.1040" timestamp="1598999741963" />
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom" timestamp="1599001174402">
+      <screen x="0" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040/0.-1080.1920.1040/-1920.3.1920.1040/1920.3.1920.1040/-1920.-1077.1920.1040/1920.-1077.1920.1040@0.-1080.1920.1040" timestamp="1599001174402" />
+    <state width="1877" height="282" key="GridCell.Tab.0.center" timestamp="1599001174402">
+      <screen x="0" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.center/0.0.1920.1040/0.-1080.1920.1040/-1920.3.1920.1040/1920.3.1920.1040/-1920.-1077.1920.1040/1920.-1077.1920.1040@0.-1080.1920.1040" timestamp="1599001174402" />
+    <state width="1877" height="282" key="GridCell.Tab.0.left" timestamp="1599001174402">
+      <screen x="0" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.left/0.0.1920.1040/0.-1080.1920.1040/-1920.3.1920.1040/1920.3.1920.1040/-1920.-1077.1920.1040/1920.-1077.1920.1040@0.-1080.1920.1040" timestamp="1599001174402" />
+    <state width="1877" height="282" key="GridCell.Tab.0.right" timestamp="1599001174402">
+      <screen x="0" y="-1080" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="282" key="GridCell.Tab.0.right/0.0.1920.1040/0.-1080.1920.1040/-1920.3.1920.1040/1920.3.1920.1040/-1920.-1077.1920.1040/1920.-1077.1920.1040@0.-1080.1920.1040" timestamp="1599001174402" />
+    <state x="184" y="-994" key="MergeDialog" timestamp="1599000620510">
+      <screen x="0" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="184" y="-994" key="MergeDialog/0.0.1920.1040/0.-1080.1920.1040/-1920.3.1920.1040/1920.3.1920.1040/-1920.-1077.1920.1040/1920.-1077.1920.1040@0.-1080.1920.1040" timestamp="1599000620510" />
+    <state x="749" y="-847" key="git4idea.branch.GitSmartOperationDialog" timestamp="1599000593566">
+      <screen x="0" y="-1080" width="1920" height="1040" />
+    </state>
+    <state x="749" y="-847" key="git4idea.branch.GitSmartOperationDialog/0.0.1920.1040/0.-1080.1920.1040/-1920.3.1920.1040/1920.3.1920.1040/-1920.-1077.1920.1040/1920.-1077.1920.1040@0.-1080.1920.1040" timestamp="1599000593566" />
     <state x="623" y="-855" width="672" height="678" key="search.everywhere.popup" timestamp="1599000253198">
       <screen x="0" y="-1080" width="1920" height="1040" />
     </state>

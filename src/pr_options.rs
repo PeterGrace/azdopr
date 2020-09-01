@@ -1,14 +1,18 @@
 
 #[derive(Serialize, Default)]
 pub struct CompletionOptions {
-    pub deleteSourceBranch: bool
+    #[serde(rename = "deleteSourceBranch")]
+    pub delete_source_branch: bool
 }
 
 #[derive(Serialize, Default)]
 pub struct PROptions {
-    pub sourceRefName: String,
-    pub targetRefName: String,
+    #[serde(rename = "sourceRefName")]
+    pub source_ref: String,
+    #[serde(rename = "targetRefName")]
+    pub target_ref: String,
     pub title: String,
     pub description: String,
-    pub completionOptions: CompletionOptions
+    #[serde(rename = "completionOptions")]
+    pub completion_options: CompletionOptions
 }
